@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            끝말잇기
+        </title>
+    </head>
+    <body>
+        <div id = "hidden1">
+        <h1>몇명이 게임에 참가할지 선택하세요.</h1>
+            <input type="text" title="인원수" id = "game_num">
+            <input type="submit" value="게임시작" id ="button">
+        </div>
+
+        <div id = "hidden2" >
+            <h1>게임이 시작되었습니다.</h1>
+            <h2><span id = "num"></span> 참가자</h2>
+        </div>
+    </body>
+    <style>
+        #hidden2{display: none;}
+    </style>
+    <script>
+
+
+        const $button_click = document.querySelector('#button').addEventListener('click',()=>{
+          const $game_num = document.getElementById('game_num').value;
+           //console.log($game_num);
+
+           const $game_num_val = new Array(Number($game_num)); //총 게임에 참여하는 인원수
+           console.log($game_num_val);
+
+            for (let i = 0; i < $game_num_val.length; i++) {
+
+                $game_num_val[i] = prompt('참가자 이름을 알려주세요.>');
+                if($game_num_val[i]==null){
+                    confirm('잘못된 입력입니다... 종료합니다...');
+                    break;
+                }else{
+                    console.log($game_num_val[i]);
+                }
+            }
+            
+                document.getElementById('hidden1').style.display="none";
+            
+            
+            document.getElementById('hidden2').style.display="block";
+
+            
+
+        });
+    </script>
+</html>
