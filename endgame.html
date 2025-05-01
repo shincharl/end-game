@@ -9,13 +9,15 @@
     <body>
         <div id = "hidden1">
         <h1>몇명이 게임에 참가할지 선택하세요.</h1>
-            <input type="text" title="인원수" id = "game_num">
-            <input type="submit" value="게임시작" id ="button">
+            <input type="text" title="인원수" id = "game_num" onfocus="this.value=''">
+            <input type="submit" value="게임시작" id ="button1">
         </div>
 
         <div id = "hidden2" >
             <h1>게임이 시작되었습니다.</h1>
-            <h2><span id = "num"></span> 참가자</h2>
+            <h2><span id = "chamgaja"></span> 참가자  <단어를 입력해 주세요.></h2>
+            <input type="text" title="단어입력창" id ="word">
+            <input type="submit" value="입력" id ="button2">
         </div>
     </body>
     <style>
@@ -24,7 +26,7 @@
     <script>
 
 
-        const $button_click = document.querySelector('#button').addEventListener('click',()=>{
+        const $button_click1 = document.querySelector('#button1').addEventListener('click',()=>{
           const $game_num = document.getElementById('game_num').value;
            //console.log($game_num);
 
@@ -47,8 +49,50 @@
             
             document.getElementById('hidden2').style.display="block";
 
-            
 
+            //시작 참가자 이름 나타내는 부분
+            
+           const $player1 = $game_num_val[0];
+            //console.log($player1);
+            
+            const $chamgaja = document.getElementById("chamgaja");
+            const $input = document.createTextNode($player1);
+            $chamgaja.appendChild($input);
+
+            ///////////////////////////////////////////////////////////
+
+            // 끝말잇기 게임 메인 부분
+
+        const button_click2 = document.querySelector('#button2').addEventListener('click',()=>{
+                const Input_word = document.getElementById('word').value;
+                //console.log(Input_word);
+        
+
+
+                if(!Input_word){
+                    //아무것도 입력을 하지 않고 진행했을때
+
+                    confirm("잘못된 답을 입력하셨습니다. 게임을 종료합니다.");
+
+                    document.getElementById('hidden1').style.display="block";
+                    document.getElementById('hidden2').style.display="none";
+
+
+                }else{
+
+
+                    //올바른 답을 입력했을때
+                    const $answer = document.querySelector('#word').value;
+                    //console.log($answer);
+                    
+
+                    const $answer_arr = $answer.trim().split("");
+                    // trim으로 앞뒤 공백 제거, split으로 각각 문자별로 잘라서 배열에 저장
+
+
+                }
+
+            });
         });
     </script>
 </html>
