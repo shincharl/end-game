@@ -14,8 +14,8 @@
         </div>
 
         <div id = "hidden2" >
-            <h1>게임이 시작되었습니다.</h1>
-            <h2><span id = "chamgaja"></span> 참가자  <단어를 입력해 주세요.></h2>
+            <h1>게임을 시작하겠습니다.</h1>
+            <h2><span id = "chamgaja"></span>  ,단어를 입력해 주세요.</h2>
             <input type="text" title="단어입력창" id ="word">
             <input type="submit" value="입력" id ="button2">
         </div>
@@ -49,15 +49,17 @@
             document.getElementById('hidden2').style.display="block";
 
 
-            //시작 참가자 이름 나타내는 부분
+            //시작 나타내는 부분
 
-            const $player1 = $game_num_val[0]; // 초기값 1번째 참가자
+            const $player1 = "시작 "; // 초기값 1번째 참가자
             const $chamgaja1 = document.getElementById("chamgaja");
             const $input = document.createTextNode($player1);
             //console.log($input);
 
             $chamgaja1.appendChild($input);
             
+
+
             // 참가자 이름 교체
 
             var cycle = 0;
@@ -69,26 +71,36 @@
             // $('$chamgaja').empty();
 
             $change.remove();
+            $input.remove();
 
            // console.log(cycle);
             if(!$game_num_val.length){
                 confirm('값이 없습니다.');
             }else{
-                let $player_Next = $game_num_val[++cycle];
+
+                let $player_Next = $game_num_val[cycle];
+                cycle = cycle + 1;
                 //console.log($game_num_val[cycle++]);
                 console.log(cycle);
                 console.log($game_num_val[cycle]);
 
-                $input.remove();
+                
+                if($game_num_val[cycle] == undefined){
+                    console.log($game_num_val);
+                    cycle = 0;
+                 
+
+
+                }
+
+                //$input.remove();
                 $change = document.createTextNode($player_Next);
 
-               // if(typeof $game_num_val[cycle] == undefined || $game_num_val[cycle] == null || $game_num_val[cycle] == "" ){
 
-                      //  $game_num_val[0];
+                console.log(typeof $game_num_val[cycle]);
 
-                 //   } 
-                 
-                    $chamgaja1.append($change);
+
+                $chamgaja1.append($change);
 
             }
 
