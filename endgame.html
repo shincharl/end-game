@@ -29,7 +29,7 @@
           const $game_num = document.getElementById('game_num').value;
            //console.log($game_num);
 
-           const $game_num_val = new Array(Number($game_num)); //총 게임에 참여하는 인원수
+           let $game_num_val = new Array(Number($game_num)); //총 게임에 참여하는 인원수
            console.log($game_num_val);
 
             for (let i = 0; i < $game_num_val.length; i++) {
@@ -65,7 +65,7 @@
             var cycle = 0;
             let $change = document.createTextNode('');
 
-            const chamgaja_Change = function(){
+            const chamgaja_Change = function (){
             //const $next_Chamgaja = document.getElementById("chamgaja");
 
             // $('$chamgaja').empty();
@@ -78,13 +78,15 @@
                 confirm('값이 없습니다.');
             }else{
 
+                //옳게 실행 됬을 때의 결과
+
+
                 let $player_Next = $game_num_val[cycle];
                 cycle = cycle + 1;
-                //console.log($game_num_val[cycle++]);
-                console.log(cycle);
-                console.log($game_num_val[cycle]);
+                //console.log(cycle);
+                //console.log($game_num_val[cycle]);
 
-                
+
                 if($game_num_val[cycle] == undefined){
                     console.log($game_num_val);
                     cycle = 0;
@@ -97,7 +99,7 @@
                 $change = document.createTextNode($player_Next);
 
 
-                console.log(typeof $game_num_val[cycle]);
+                //console.log(typeof $game_num_val[cycle]);
 
 
                 $chamgaja1.append($change);
@@ -109,6 +111,38 @@
             ///////////////////////////////////////////////////////////
 
             // 끝말잇기 게임 메인 부분
+
+            let count1 = 0;
+            //let count2 = 1;
+            let $Word = []; //1
+            function count_Up($answer){
+
+                let $word_Indexofs  = $Word[count1];
+
+                if($answer.indexOf($word_Indexofs) == -1){ // 입력한 단어가 올바른지 비교
+                    console.log($answer);
+                    confirm(`값이 틀립니다..... ${document.getElementById("chamgaja").innerText} Game over....`);
+
+
+
+                    const $empty = document.getElementById('chamgaja');
+                    $empty.innerHTML = "";
+
+                    document.getElementById('hidden1').style.display="block";
+                    document.getElementById('hidden2').style.display="none";
+
+                    location.reload();
+
+                }
+
+                if($Word.length == 1){
+                    count1 = -1;
+                }
+
+                count1 += 1;
+            }
+
+            //console.log($Word);
 
         const button_click2 = document.querySelector('#button2').addEventListener('click',()=>{
                 const Input_word = document.getElementById('word').value;
@@ -129,20 +163,24 @@
                     //올바른 답을 입력했을때
                     const $answer = document.querySelector('#word').value;
                     
-                    
-
-                    const $answer_arr = $answer.trim().split("");
+                    let $answer_arr1 = $answer.trim();
+                    let $answer_arr = $answer.trim().split("");
                     // trim으로 앞뒤 공백 제거, split으로 각각 문자별로 잘라서 배열에 저장
 
                     console.log($answer_arr);
                     
-                    const $last_Word = $answer_arr.pop(); // 마지막 단어 입력값만 가져오기
-                    
-                    chamgaja_Change();
+                    var $last_Word = $answer_arr.pop(); // 마지막 단어 입력값만 가져오기
+
+
+
+                    chamgaja_Change(); //사용자 전환 
+                
+
+                    $Word.push($last_Word);  // 마지막 단어 문자 저장
 
                     
+                    count_Up($answer); // 단어 비교
 
-                    
 
 
                 }
